@@ -1,73 +1,101 @@
 # Red Team Lab – Network Connectivity & Netcat Testing
 
-## Overview
-This lab simulates a Red Team scenario focused on diagnosing network connectivity issues and establishing communication between two virtual machines.
+## Lab Summary
+This project simulates a Red Team scenario focused on diagnosing network connectivity and validating whether remote exploitation is technically possible.
 
-The objective was to understand how routing, services, and firewall behavior impact the feasibility of remote exploitation.
-
-## Lab Environment
-- Kali Linux attacker machine
-- Linux server target
-- VMware virtual environment
-- Internal network (same subnet)
-
-## Tools Used
-- Nmap
-- Netcat
-- Linux networking tools (ip addr, ip route)
-
-## Methodology
-
-### 1. Network Identification
-- Verified interfaces using `ip addr`
-- Confirmed both machines were in the same subnet
-- Differentiated loopback vs real IP
-
-### 2. Routing Diagnosis
-- Checked routing table with `ip route`
-- Identified missing route causing *Network unreachable*
-- Fixed interface/network configuration
-
-### 3. Host Discovery
-- Used Nmap to confirm host availability
-- Observed filtered/closed ports
-- Confirmed that reachability does not imply service exposure
-
-### 4. Service Communication Test
-- Started Netcat listener on target
-- Connected from attacker
-- Validated bidirectional TCP communication
-
-### 5. Error Analysis
-Observed and analyzed:
-
-- Network unreachable → routing issue
-- Connection timed out → firewall/service absence
-- Connection refused → port closed
-
-### 6. Red Team Simulation
-
-**Bind shell**
-Target listens for incoming connection.
-
-**Reverse shell**
-Target initiates outbound connection to attacker (more realistic in real environments).
-
-## Key Security Takeaways
-
-- Exploitation requires a functional network first
-- Routing misconfiguration prevents attacks entirely
-- Open port + listening service are mandatory
-- Reverse shells bypass inbound firewall restrictions
-- Structured diagnosis is essential before exploitation
-
-## Files
-
-- `Red_Team_Lab_Connectivity_Netcat_EN.pdf` — full lab documentation
-
-## Author
-Sivonaldo Silva
+The goal was not exploitation itself, but understanding the prerequisites that make exploitation feasible in real environments.
 
 ---
 
-This repository is part of my cybersecurity learning journey and hands-on Red Team practice.
+## Environment
+
+- Attacker: Kali Linux
+- Target: Linux server
+- Virtualization: VMware
+- Network: Internal subnet (same Layer 2 network)
+
+---
+
+## Tools Used
+
+- Nmap – host discovery and port visibility
+- Netcat – TCP communication testing and shell simulation
+- Linux networking tools – interface and routing diagnostics
+
+---
+
+## Methodology
+
+### Network Identification
+Verified interfaces using `ip addr`, confirming valid IP addresses and distinguishing loopback from reachable hosts.
+
+### Routing Analysis
+Inspected routing table with `ip route`.  
+Detected missing route preventing connectivity and corrected network configuration.
+
+### Host Validation
+Used Nmap to confirm host reachability and observe port filtering behavior.
+
+### Service Communication Test
+Established TCP communication using Netcat listener/client model.  
+Validated bidirectional communication and successful handshake.
+
+### Error Investigation
+Observed and interpreted typical connectivity failures:
+
+- **Network unreachable** → routing problem  
+- **Connection timed out** → firewall or service absence  
+- **Connection refused** → port closed but host reachable  
+
+---
+
+## Red Team Simulation
+
+### Bind Shell
+Target listens for inbound connection.
+
+### Reverse Shell
+Target initiates outbound connection to attacker.  
+This approach is more realistic because it bypasses inbound firewall restrictions.
+
+---
+
+## Skills Demonstrated
+
+- Network troubleshooting methodology  
+- Layer 3 routing diagnosis  
+- Service availability validation  
+- TCP communication verification  
+- Understanding prerequisites for exploitation  
+- Structured Red Team reasoning process  
+
+---
+
+## Key Takeaways
+
+Remote exploitation depends on multiple technical prerequisites:
+
+1. Functional network connectivity  
+2. Valid routing configuration  
+3. Open port  
+4. Listening service  
+5. Firewall allowing traffic  
+
+Failure at any stage prevents exploitation.
+
+---
+
+## Files
+
+- `Red_Team_Lab_Connectivity_Netcat_EN.pdf` – full lab documentation
+
+---
+
+## Author
+
+**Sivonaldo Silva**  
+Cybersecurity student focused on hands-on Red Team practice.
+
+---
+
+This repository is part of my practical cybersecurity learning journey.
